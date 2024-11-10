@@ -21,10 +21,7 @@ public class Lockpicker {
     public String decryptFloat(float fx) {
         // TODO: Implementiere diese Methode
         double result = Math.abs(Math.cos((fx + mbox.getIntHint()) * mbox.getFloatHint()));
-        long roundedResult = Math.round(result * 1000) % 1000;
-        if (roundedResult == 0) {
-            roundedResult = Math.round(result * 1000) % 10000;
-        }
+        long roundedResult = Math.round(result * 1000);
         return String.valueOf(roundedResult);
     }
 
@@ -55,7 +52,7 @@ public class Lockpicker {
         String roundedFirstResult = String.valueOf(Math.round(firstResult * 10000.0));
         String roundedSecondResult = String.valueOf(Math.round(secondResult * 10000.0));
         return (roundedFirstResult).substring(roundedFirstResult.length()-4) +
-               (roundedSecondResult).substring(roundedSecondResult.length()-4);
+                (roundedSecondResult).substring(roundedSecondResult.length()-4);
 
     }
 
@@ -88,10 +85,5 @@ public class Lockpicker {
     }
 
     public static void main(String[] args) {
-        Lockpicker lockpicker = new Lockpicker(null);
-        for (int i = 0; i < 10000; i++) {
-            lockpicker.setMbox(new Mysterybox(i, ""));
-            lockpicker.solve();
-        }
     }
 }
